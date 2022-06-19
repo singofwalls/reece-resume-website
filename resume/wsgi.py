@@ -24,7 +24,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'resume.settings')
 if settings.DEBUG:
     import debugpy
     try:
-        debugpy.log_to(settings.ATTACH_DEBUG_LOG_PATH)
+        debugpy.log_to(str(settings.ATTACH_DEBUG_LOG_PATH))
     except RuntimeError:
         # This error occurs if the logging is already setup when attempting to launch
         #  wsgi.py -- such as when remoted into a virtual box repo hosting a live, Apache instance

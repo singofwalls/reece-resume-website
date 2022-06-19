@@ -24,7 +24,8 @@ with open(BASE_DIR / 'django-key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = [
     "reece.pericarpal.com",
@@ -32,6 +33,9 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
+STATIC_URL = '/static'
+STATICFILES_DIRS = (BASE_DIR / 'static',)
+STATIC_ROOT = "/var/www/static"
 
 # Application definition
 
@@ -59,7 +63,7 @@ ROOT_URLCONF = 'resume.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'resume' / "templates" / 'resume'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,5 +130,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ATTACH_DEBUG_LOG_PATH = 'logs'
+ATTACH_DEBUG_LOG_PATH = BASE_DIR / 'logs'
 ATTACH_DEBUG_PORT = 65078

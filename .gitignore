@@ -1,1 +1,3 @@
 django-key.txt
+logs/
+**__pycache__**
