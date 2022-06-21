@@ -1,3 +1,40 @@
 {% include "header.html" %}
+{% load static %}
 
-hello
+<!-- Spacer so card doesn't clip ceiling on mobile -->
+<div style="margin: 5%;"></div> 
+
+<div class="container" style="flex-flow: row wrap">
+    <div class="card border-light responsive">
+        <div class="card-body">
+            <h5 class="card-title display-1">Reece Mathews</h5>
+            <p class="card-text lead">
+                B.S. Computer Science, University of Kansas, May 2022
+            </p>
+            <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%" alt="...">
+        </div>
+    </div>
+    <div class="card border-0" style="margin-left: 5%; width: 50%">
+        <div class="card-body">
+            <h5 class="card-title display-6" style="margin-bottom: 10px;">Projects</h5>
+            <div class="card border-0">
+                <div class="card-body">
+                    <img src="https://stravant.pericarpal.com/logo.png" class="img-fluid" style='margin-bottom: 10px' alt="Stravan't">
+                    <h6 class="card-subtitle text-muted">Class Project</h5>
+                    <p class="card-text lead">
+                        Activity tracker
+                    </p>
+                    <a href="https://stravant.pericarpal.com" class="stretched-link"></a>
+                </div>
+                <div class="card-body">
+                    <img src="https://coursecorrect.pericarpal.com/images/logo.png" class="img-fluid" style='margin-bottom: 10px' alt="CourseCorrect">
+                    <h6 class="card-subtitle text-muted">Class Project</h5>
+                    <p class="card-text lead">
+                        Class planner
+                    </p>
+                    <a href="https://coursecorrect.pericarpal.com" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

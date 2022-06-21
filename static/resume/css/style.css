@@ -1,0 +1,21 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 5%;
+}
+
+.responsive {
+    width: 45%;
+}
+
+@media only screen and (max-width: 600px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.card {
+    height: fit-content;
+}
