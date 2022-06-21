@@ -2,37 +2,62 @@
 {% load static %}
 
 <!-- Spacer so card doesn't clip ceiling on mobile -->
-<div style="margin: 5%;"></div> 
+<div style="margin: 5%;"></div>
 
 <div class="container" style="flex-flow: row wrap">
+    <!-- Left column, me -->
     <div class="card border-light responsive">
         <div class="card-body">
             <h5 class="card-title display-1">Reece Mathews</h5>
             <p class="card-text lead">
-                B.S. Computer Science, University of Kansas, May 2022
+                B.S. in Computer Science, University of Kansas, May 2022
             </p>
             <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%" alt="...">
         </div>
     </div>
-    <div class="card border-0" style="margin-left: 5%; width: 50%">
+    <div style="padding-left: 40px"></div>
+    <!-- Right column, projects -->
+    {% comment %} TODO: use templating to clean this up {% endcomment %}
+    <div class="card border-0 card-dark responsive" style="width: 50%">
         <div class="card-body">
-            <h5 class="card-title display-6" style="margin-bottom: 10px;">Projects</h5>
-            <div class="card border-0">
+            <h5 class="card-title display-3" style="margin-bottom: 30px;">Projects</h5>
+            <!-- Project 1 -->
+            <div class="card border-1">
                 <div class="card-body">
-                    <img src="https://stravant.pericarpal.com/logo.png" class="img-fluid" style='margin-bottom: 10px' alt="Stravan't">
+                    <img src="https://stravant.pericarpal.com/logo.png" class="img-fluid" style='margin-bottom: 10px'
+                        alt="Stravan't">
+                    <h5 class="card-title display-6" style="margin-bottom: 10px;">Stravan't</h5>
                     <h6 class="card-subtitle text-muted">Class Project</h5>
-                    <p class="card-text lead">
-                        Activity tracker
-                    </p>
-                    <a href="https://stravant.pericarpal.com" class="stretched-link"></a>
+                        <p class="card-text lead">
+                            Activity tracker
+                        </p>
+                        <a href="https://stravant.pericarpal.com" class="stretched-link"></a>
                 </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="card border-1">
                 <div class="card-body">
-                    <img src="https://coursecorrect.pericarpal.com/images/logo.png" class="img-fluid" style='margin-bottom: 10px' alt="CourseCorrect">
+                    <img src="https://coursecorrect.pericarpal.com/images/logo.png" class="img-fluid"
+                        style='margin-bottom: 10px' alt="CourseCorrect">
+                    <h5 class="card-title display-6" style="margin-bottom: 10px;">CourseCorrect</h5>
                     <h6 class="card-subtitle text-muted">Class Project</h5>
-                    <p class="card-text lead">
-                        Class planner
-                    </p>
-                    <a href="https://coursecorrect.pericarpal.com" class="stretched-link"></a>
+                        <p class="card-text lead">
+                            Class planner
+                        </p>
+                        <a href="https://coursecorrect.pericarpal.com" class="stretched-link"></a>
+                </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="card border-1">
+                <div class="card-body">
+                    <img src="https://raw.githubusercontent.com/singofwalls/gmod_ttt2_role_menu/master/role_menu.jpg"
+                        class="img-fluid" style='margin-bottom: 10px' alt="CourseCorrect">
+                    <h5 class="card-title display-6" style="margin-bottom: 10px;">GMod TTT Role Description Menu</h5>
+                    <h6 class="card-subtitle text-muted">Personal Project</h5>
+                        <p class="card-text lead">
+                            An addon for the TTT gamemode of the video game, Garry's Mod
+                        </p>
+                        <a href="https://coursecorrect.pericarpal.com" class="stretched-link"></a>
                 </div>
             </div>
         </div>
