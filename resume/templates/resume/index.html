@@ -4,12 +4,9 @@
 {% include "rain.html" %}
 
 
-<!-- Spacer so card doesn't clip ceiling on mobile -->
-<div style="margin: 5%;"></div>
-
 <div class="container" style="flex-flow: row wrap">
     <!-- Left column, me -->
-    <div class="card border-0 responsive">
+    <div class="card responsive"  style="width: 40%">
         <div class="card-body">
             <h5 class="card-title display-1">Reece Mathews</h5>
             <p class="card-text lead">
@@ -18,9 +15,8 @@
             <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%" alt="...">
         </div>
     </div>
-    <div style="padding-left: 40px"></div>
     <!-- Middle column, projects -->
-    <div class="card responsive inner-card" style="width: 30%">
+    <div class="card responsive" style="width: 30%">
         <div class="card-body">
             <h5 class="card-title display-6" style="margin-bottom: 30px; padding-left: 15px;">Projects</h5>
             {% for project in projects %}
@@ -32,12 +28,34 @@
                     <p class="card-text">
                         {{project.desc}}
                     </p>
+                    {% for component in project.components %}
+                        <span class="badge badge-light">{{component}}</span>
+                    {% endfor %}
                     <a href="{{project.url}}" class="stretched-link"></a>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    <div class="card border-0 responsive" style="width: 20%">
+    <div class="card responsive" style="width: 30%">
+        <div class="card-body">
+            <h5 class="card-title display-6" style="margin-bottom: 30px; padding-left: 15px;">Experience</h5>
+            {% for experience in experiences %}
+            <div class="card inner-card" style="margin-bottom: 5px;">
+                <div class="card-body">
+                    <div class="card-header" style="border: 0px; margin-bottom: 5px;">{{experience.location|safe}}</div>
+                    <p><i><small>{{experience.address}}</small></i></p>
+                    <h5 class="card-title">{{experience.title}}</h5>
+                    <p><small>{{experience.period}}. Under {{experience.supervisor}}</small></p>
+                    <p class="card-text">
+                        {{experience.desc}}
+                    </p>
+                    {% for component in experience.components %}
+                        <span class="badge badge-light">{{component}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>

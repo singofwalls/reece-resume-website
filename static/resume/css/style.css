@@ -18,15 +18,60 @@
 
 .card {
     height: fit-content;
-    background: rgba(112, 128, 144,.80);
+    border: 0px;
+    background: rgba(43, 44, 52, .80);
+}
+
+.card-header {
+    color: gainsboro;
+    background-color: #27282f;
 }
 
 .inner-card {
-    border: 0px;
+    border: 1px solid #404148;
     background: none;
 }
 
+.card-header {
+    padding: 2px;
+}
+
+h5 {
+    font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+p {
+    color: gainsboro;
+}
 
 * {
     color: whitesmoke;
+}
+
+.badge {
+    font-weight: 300;
+}
+
+body {
+    background: rgb(43, 44, 52);
+    overflow-x: hidden;
+}
+
+/* Scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(43, 44, 52);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
