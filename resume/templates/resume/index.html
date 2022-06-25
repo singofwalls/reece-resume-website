@@ -1,12 +1,15 @@
 {% include "header.html" %}
 {% load static %}
 
+{% include "rain.html" %}
+
+
 <!-- Spacer so card doesn't clip ceiling on mobile -->
 <div style="margin: 5%;"></div>
 
 <div class="container" style="flex-flow: row wrap">
     <!-- Left column, me -->
-    <div class="card border-light responsive">
+    <div class="card border-0 responsive">
         <div class="card-body">
             <h5 class="card-title display-1">Reece Mathews</h5>
             <p class="card-text lead">
@@ -16,50 +19,25 @@
         </div>
     </div>
     <div style="padding-left: 40px"></div>
-    <!-- Right column, projects -->
-    {% comment %} TODO: use templating to clean this up {% endcomment %}
-    <div class="card border-0 bg-light responsive" style="width: 50%">
+    <!-- Middle column, projects -->
+    <div class="card responsive inner-card" style="width: 30%">
         <div class="card-body">
-            <h5 class="card-title display-3" style="margin-bottom: 30px;">Projects</h5>
-            <!-- Project 1 -->
-            <div class="card">
+            <h5 class="card-title display-6" style="margin-bottom: 30px; padding-left: 15px;">Projects</h5>
+            {% for project in projects %}
+            <div class="card inner-card" style="margin-bottom: 5px;">
                 <div class="card-body">
-                    <img src="https://stravant.pericarpal.com/logo.png" class="img-fluid" style='margin-bottom: 10px'
-                        alt="Stravan't">
-                    <h5 class="card-title display-6" style="margin-bottom: 10px;">Stravan't</h5>
-                    <h6 class="card-subtitle text-muted">Class Project</h5>
-                        <p class="card-text lead">
-                            Activity tracker
-                        </p>
-                        <a href="https://stravant.pericarpal.com" class="stretched-link"></a>
+                    <div class="card-header" style="border: 0px; margin-bottom: 5px;">{{project.type}}</div>
+                    <h5 class="card-title">{{project.title}}</h5>
+                    {% comment %} <img src="{{project.img}}" class="img-fluid" style='margin-bottom: 10px' alt="{{project.title}}"> {% endcomment %}
+                    <p class="card-text">
+                        {{project.desc}}
+                    </p>
+                    <a href="{{project.url}}" class="stretched-link"></a>
                 </div>
             </div>
-            <!-- Project 2 -->
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://coursecorrect.pericarpal.com/images/logo.png" class="img-fluid"
-                        style='margin-bottom: 10px' alt="CourseCorrect">
-                    <h5 class="card-title display-6" style="margin-bottom: 10px;">CourseCorrect</h5>
-                    <h6 class="card-subtitle text-muted">Class Project</h5>
-                        <p class="card-text lead">
-                            Class planner
-                        </p>
-                        <a href="https://coursecorrect.pericarpal.com" class="stretched-link"></a>
-                </div>
-            </div>
-            <!-- Project 3 -->
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://raw.githubusercontent.com/singofwalls/gmod_ttt2_role_menu/master/role_menu.jpg"
-                        class="img-fluid" style='margin-bottom: 10px' alt="CourseCorrect">
-                    <h5 class="card-title display-6" style="margin-bottom: 10px;">GMod TTT Role Description Menu</h5>
-                    <h6 class="card-subtitle text-muted">Personal Project</h5>
-                        <p class="card-text lead">
-                            An addon for the TTT gamemode of the video game, Garry's Mod
-                        </p>
-                        <a href="https://github.com/singofwalls/gmod_ttt2_role_menu" class="stretched-link"></a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
+    </div>
+    <div class="card border-0 responsive" style="width: 20%">
     </div>
 </div>

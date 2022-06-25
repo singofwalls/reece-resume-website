@@ -1,0 +1,115 @@
+<style>
+    #rainCanvas {
+        position: absolute;
+        margin: 0; 
+        padding: 0;
+        top: 0;
+        left: 0;
+        background: slategray;
+    }
+</style>
+<canvas id="rainCanvas"></canvas>
+<script>
+
+    const INTERVAL = 5;
+    const SPEED = 1000;
+    const LENGTH = 50;
+    const ANGLE = Math.PI*.60;
+    const DROP_LIKELIHOOD = .3;
+    const RAIN_WIDTH = 3;
+    const RAIN_COLOR = 'lightblue';
+
+    const d = new Date();
+    let lastDrawTime = d.getTime();
+
+    let droplets = [];
+
+    const canv = document.getElementById('rainCanvas');
+    let ctx = canv.getContext("2d");
+
+    class Droplet {
+        constructor(canv) {
+            if (Math.random() > .5) {
+                // Start above screen
+                this.x = Math.random()*canv.width;
+                this.y = 0;
+            } else {
+                // Start to right of screen
+                this.y = Math.random()*canv.height;
+                this.x = canv.width + LENGTH;
+            }
+
+            this.angle = ANGLE;
+            const d = new Date();
+            this.lastDrawTime = d.getTime();
+        }
+
+        draw(timeDiff) {
+
+            if (this.x < 0) {
+                return false;
+            }
+
+            let [x2, y2] = this.next_point(LENGTH);
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            [this.x, this.y] = this.next_point(timeDiff * SPEED / canv.height);
+
+            return true;
+        }
+
+        next_point(distance) {
+            let x2 = this.x + (distance * Math.cos(this.angle));
+            let y2 = this.y + (distance * Math.sin(this.angle));
+            return [x2, y2];
+        }
+    }
+
+
+    function init() {
+        canv.width = window.innerWidth;
+        canv.height = document.documentElement.scrollHeight;
+
+        ctx = canv.getContext("2d");
+
+        ctx.lineWidth = RAIN_WIDTH;
+        ctx.strokeStyle = RAIN_COLOR;
+
+        window.requestAnimationFrame(draw);
+    }
+
+    function draw() {
+        const d = new Date();
+        let newDrawTime = d.getTime();
+        let timeDiff = newDrawTime - lastDrawTime;
+
+        if (timeDiff > INTERVAL) {
+            lastDrawTime = newDrawTime;
+
+            ctx.clearRect(0, 0, canv.width, canv.height);
+
+            if (Math.random() < DROP_LIKELIHOOD) {
+                droplets.push(new Droplet(canv));
+            }
+
+            let toDelete = [];
+            for (let drop of droplets) {
+                if (!drop.draw(timeDiff)) {
+                    toDelete.push(drop);
+                }
+            }
+            droplets = droplets.filter(drop => !toDelete.includes(drop));
+        }
+        
+        window.requestAnimationFrame(draw);
+    }
+
+    init();
+    window.onload = init;
+    window.addEventListener('resize', function(event) {
+        init();
+    }, true);
+</script>

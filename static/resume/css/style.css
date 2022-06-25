@@ -18,4 +18,15 @@
 
 .card {
     height: fit-content;
+    background: rgba(112, 128, 144,.80);
+}
+
+.inner-card {
+    border: 0px;
+    background: none;
+}
+
+
+* {
+    color: whitesmoke;
 }
