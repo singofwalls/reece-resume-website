@@ -57,6 +57,7 @@ p {
     font-weight: 300;
     background: #404148;
     text-decoration: none;
+    padding: 7px;
 }
 
 a:hover {

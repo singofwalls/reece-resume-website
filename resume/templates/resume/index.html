@@ -5,7 +5,7 @@
 {% include "rain.html" %}
 
 
-<div class="container" style="flex-flow: row wrap; margin-top: 30">
+<div class="container" style="flex-flow: row wrap; margin-top: 20px">
     <!-- Left column, me -->
     <div class="card responsive"  style="width: 40%">
         <div class="card-body">
@@ -30,7 +30,7 @@
                     <h5 class="card-title">{{project.title}}</h5>
                     {% comment %} <img src="{{project.img}}" class="img-fluid" style='margin-bottom: 10px' alt="{{project.title}}"> {% endcomment %}
                     <p class="card-text">
-                        {{project.desc}}
+                        {{project.desc|safe}}
                     </p>
                     {% for component in project.components %}
                         <span class="badge badge-light">{{component}}</span>
