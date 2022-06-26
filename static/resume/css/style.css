@@ -50,6 +50,18 @@ p {
 
 .badge {
     font-weight: 300;
+    background: #404148;
+}
+
+.social-badge {
+    font-weight: 300;
+    background: #404148;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    font-weight: 600;
 }
 
 body {

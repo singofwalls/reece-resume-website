@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% include "header.html" %}
 {% load static %}
 
@@ -12,7 +13,10 @@
             <p class="card-text lead">
                 B.S. in Computer Science, University of Kansas, May 2022
             </p>
-            <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%" alt="...">
+            <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%;" alt="...">
+            {% for social in socials %}
+                <a href="{{social.url}}" class="badge social-badge" style="margin-top: 5px;"><img src="{% static social.icon %}" class="img-fluid" alt="{{social.name}}" style="margin-right: 5px; width: 32px;">{{social.user}}</a>
+            {% endfor %}
         </div>
     </div>
     <!-- Middle column, projects -->

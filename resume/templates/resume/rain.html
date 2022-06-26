@@ -33,23 +33,19 @@
             RAINING = false;
             btn.value = "Start Rain";
             btn.innerText = "Start Rain";
-            ctx.clearRect(0, 0, canv.width, canv.height);
-            for (let drop of droplets) {
-                delete drop;
-            }
-            droplets = [];
         } else {
             btn.classList.add("active");
             btn.ariaPressed = 'true';
             btn.value = "Stop Rain";
             btn.innerText = "Stop Rain";
             RAINING = true;
+            window.requestAnimationFrame(draw);
         }
         init();
     }
 
     const INTERVAL = 5;
-    const SPEED = 1000;
+    const SPEED = 1.25;
     const LENGTH = 50;
     const ANGLE = Math.PI*.60;
     const DROP_LIKELIHOOD = .3;
@@ -77,9 +73,21 @@
             this.angle = ANGLE;
             const d = new Date();
             this.lastDrawTime = d.getTime();
+            this.prevLine = [this.x, this.y, this.x, this.y];
         }
 
         draw(timeDiff) {
+
+            ctx.strokeStyle = "rgb(43, 44, 52)";
+            ctx.lineWidth = RAIN_WIDTH + 3;
+
+            ctx.beginPath();
+            ctx.moveTo(this.prevLine[0], this.prevLine[1]);
+            ctx.lineTo(this.prevLine[2], this.prevLine[3]);
+            ctx.stroke();
+
+            ctx.lineWidth = RAIN_WIDTH;
+            ctx.strokeStyle = RAIN_COLOR;
 
             if (this.x < 0) {
                 return false;
@@ -91,7 +99,12 @@
             ctx.lineTo(x2, y2);
             ctx.stroke();
 
-            [this.x, this.y] = this.next_point(timeDiff * SPEED / canv.height);
+            // Line erase covering extends 3 pixels behind and ahead
+            let [x0, y0] = this.next_point(-3);
+            let [x3, y3] = this.next_point(LENGTH + 3)
+            this.prevLine = [x0, y0, x3, y3];
+
+            [this.x, this.y] = this.next_point(timeDiff * SPEED);
 
             return true;
         }
@@ -112,12 +125,10 @@
 
         ctx.lineWidth = RAIN_WIDTH;
         ctx.strokeStyle = RAIN_COLOR;
-
-        window.requestAnimationFrame(draw);
     }
 
     function draw() {
-        if (RAINING) {
+        if (RAINING || droplets.length > 0) {
             const d = new Date();
             let newDrawTime = d.getTime();
             let timeDiff = newDrawTime - lastDrawTime;
@@ -125,9 +136,7 @@
             if (timeDiff > INTERVAL) {
                 lastDrawTime = newDrawTime;
     
-                ctx.clearRect(0, 0, canv.width, canv.height);
-    
-                if (Math.random() < DROP_LIKELIHOOD) {
+                if (Math.random() < DROP_LIKELIHOOD && RAINING) {
                     droplets.push(new Droplet(canv));
                 }
     
@@ -141,10 +150,11 @@
                 for (let oldDrop of toDelete) {
                     delete oldDrop;
                 }
+                window.requestAnimationFrame(draw);
+            } else {
+                setTimeout(draw, INTERVAL);
             }
         }
-        
-        window.requestAnimationFrame(draw);
     }
 
     toggleRain(true);
@@ -152,4 +162,5 @@
     window.addEventListener('resize', function(event) {
         init();
     }, true);
+    window.requestAnimationFrame(draw);
 </script>

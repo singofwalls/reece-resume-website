@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 
 Project = namedtuple("Project", "title type desc img url components")
 Experience = namedtuple("Experience", "title location address supervisor desc components period")
+Social = namedtuple("Social", "name icon user url")
 
 class index(TemplateView):
     projects = [
@@ -68,10 +69,26 @@ class index(TemplateView):
             ["Python", "Pyglet", "NI-DAQ"],
             "2017 - 2018"),
     ]
+    socials = [
+        Social("Github", 
+               "logos/GitHub-Mark-Light-120px-plus.png",
+               "singofwalls",
+               "https://github.com/singofwalls"),
+        Social("Stack Overflow", 
+               "logos/LogoGlyphXxs.png",
+               "reece-mathews",
+               "https://stackoverflow.com/users/7587147/reece-mathews"),
+        Social("Twitter", 
+               "logos/Twitter social icons - circle - white.png",
+               "singofwalls",
+               "https://twitter.com/singofwalls"),
+    ]
+
     template_name = "index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = self.projects
         context['experiences'] = self.experiences
+        context['socials'] = self.socials
         return context
