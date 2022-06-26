@@ -6,10 +6,47 @@
         top: 0;
         left: 0;
         background: rgb(43, 44, 52);
+        z-index: -1;
     }
+    button {
+        position: absolute;
+        margin: 10; 
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }   
 </style>
+
+<button type="button" id="rainButton"  style="color: lightblue; border: 0px; background-color: rgba(43, 44, 52, .8);" class="btn" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="toggleRain()">
+</button>
 <canvas id="rainCanvas"></canvas>
 <script>
+
+    let RAINING = true;
+    let droplets = [];
+
+    function toggleRain(forceOn=false) {
+        btn = document.getElementById("rainButton");
+        if (!forceOn && btn.classList.contains("active")) {
+            btn.classList.remove("active");
+            btn.ariaPressed = 'false';
+            RAINING = false;
+            btn.value = "Start Rain";
+            btn.innerText = "Start Rain";
+            ctx.clearRect(0, 0, canv.width, canv.height);
+            for (let drop of droplets) {
+                delete drop;
+            }
+            droplets = [];
+        } else {
+            btn.classList.add("active");
+            btn.ariaPressed = 'true';
+            btn.value = "Stop Rain";
+            btn.innerText = "Stop Rain";
+            RAINING = true;
+        }
+        init();
+    }
 
     const INTERVAL = 5;
     const SPEED = 1000;
@@ -22,8 +59,6 @@
     const d = new Date();
     let lastDrawTime = d.getTime();
 
-    let droplets = [];
-
     const canv = document.getElementById('rainCanvas');
     let ctx = canv.getContext("2d");
 
@@ -32,7 +67,7 @@
             if (Math.random() > .5) {
                 // Start above screen
                 this.x = Math.random()*canv.width;
-                this.y = 0;
+                this.y = -LENGTH;
             } else {
                 // Start to right of screen
                 this.y = Math.random()*canv.height;
@@ -82,32 +117,37 @@
     }
 
     function draw() {
-        const d = new Date();
-        let newDrawTime = d.getTime();
-        let timeDiff = newDrawTime - lastDrawTime;
-
-        if (timeDiff > INTERVAL) {
-            lastDrawTime = newDrawTime;
-
-            ctx.clearRect(0, 0, canv.width, canv.height);
-
-            if (Math.random() < DROP_LIKELIHOOD) {
-                droplets.push(new Droplet(canv));
-            }
-
-            let toDelete = [];
-            for (let drop of droplets) {
-                if (!drop.draw(timeDiff)) {
-                    toDelete.push(drop);
+        if (RAINING) {
+            const d = new Date();
+            let newDrawTime = d.getTime();
+            let timeDiff = newDrawTime - lastDrawTime;
+    
+            if (timeDiff > INTERVAL) {
+                lastDrawTime = newDrawTime;
+    
+                ctx.clearRect(0, 0, canv.width, canv.height);
+    
+                if (Math.random() < DROP_LIKELIHOOD) {
+                    droplets.push(new Droplet(canv));
+                }
+    
+                let toDelete = [];
+                for (let drop of droplets) {
+                    if (!drop.draw(timeDiff)) {
+                        toDelete.push(drop);
+                    }
+                }
+                droplets = droplets.filter(drop => !toDelete.includes(drop));
+                for (let oldDrop of toDelete) {
+                    delete oldDrop;
                 }
             }
-            droplets = droplets.filter(drop => !toDelete.includes(drop));
         }
         
         window.requestAnimationFrame(draw);
     }
 
-    init();
+    toggleRain(true);
     window.onload = init;
     window.addEventListener('resize', function(event) {
         init();
