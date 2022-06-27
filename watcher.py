@@ -1,4 +1,6 @@
 #!../.venv/bin/python
+"""Automatically collect static files to root location when changed in project sub dir."""
+
 import time
 import os
 from watchdog.observers import Observer

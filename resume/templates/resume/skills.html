@@ -1,7 +1,17 @@
 {% load static %}
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title display-6">Skills</h5>
+        {% for skill in skills %}
+            <span class="badge badge-light component">{{skill}}</span>
+        {% endfor %}
+    </div>
+</div>
+
 <script>
     let components = {};
+    let selected = [];
 
     function highlight(component_name) {
         for (let component of components[component_name]) {
@@ -18,14 +28,32 @@
         }
     }
 
+    function select(event) {
+        let component = event.srcElement;
+        let component_name = component.innerText;
+        if (selected.includes(component_name)) {
+            selected.splice(selected.indexOf(component_name), 1);
+            unhighlight(component.innerText);
+        } else {
+            selected.push(component_name)
+            highlight(component.innerText);
+        }
+    }
+
     function init() {
         let all_components = document.getElementsByClassName("component");
         for (let component of all_components) {
             component.addEventListener("mouseover", function () {
                 highlight(component.innerText);
             });
+            component.addEventListener("click", select);
             component.addEventListener("mouseout", function () {
-                unhighlight(component.innerText);
+                setTimeout(function () {
+                    if (!selected.includes(component.innerText)) {
+                        unhighlight(component.innerText);
+                    }
+                }, .1);
+               
             });
 
             // Add to components mapping
@@ -40,11 +68,3 @@
     window.onload.functions.push(init);
 
 </script>
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title display-6">Skills</h5>
-        {% for skill in skills %}
-            <span class="badge badge-light component">{{skill}}</span>
-        {% endfor %}
-    </div>
-</div>

@@ -53,14 +53,18 @@ p {
     background: #404148;
 }
 
+.component {
+    cursor: pointer;
+}
+
 .social-badge {
     font-weight: 300;
-    background: #404148;
+    background: none;
     text-decoration: none;
     padding: 7px;
 }
 
-a {
+a, a:active, a:visited {
     color: whitesmoke;
     text-decoration: none;
 }

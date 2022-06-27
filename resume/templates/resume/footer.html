@@ -1,4 +1,17 @@
-<div class="d-flex justify-content-end">
-    <div class="p-2">© 2022 Reece Mathews</div><div class="p-2"></div>
+<div id='footer' class="d-flex justify-content-end">
+    <div class="p-2"><a href="https://github.com/singofwalls/reece-resume-website">Website Source</a></div><div class="p-2">© 2022 Reece Mathews</div><div id="footer-spacer" class="p-2"></div>
 </div>
 <br>
+
+<script>
+ if (screen.width < screen.height) {
+    // Mobile device likely, center the footer
+
+    let footer = document.getElementById("footer");
+    footer.classList.remove("justify-content-end");
+    footer.classList.add("justify-content-center");
+    
+    let footer_spacer = document.getElementById("footer-spacer");
+    footer_spacer.remove();
+ }
+</script>
