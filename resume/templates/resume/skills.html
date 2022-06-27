@@ -1,0 +1,50 @@
+{% load static %}
+
+<script>
+    let components = {};
+
+    function highlight(component_name) {
+        for (let component of components[component_name]) {
+            component.style["background-color"] = "whitesmoke";
+            component.style["color"] = "slategray";
+            component.style["text-shadow"] = "0px 0px 1px slategray";
+        }
+    }
+    function unhighlight(component_name) {
+        for (let component of components[component_name]) {
+            component.style["background-color"] = "";
+            component.style["color"] = "";
+            component.style["text-shadow"] = "";
+        }
+    }
+
+    function init() {
+        let all_components = document.getElementsByClassName("component");
+        for (let component of all_components) {
+            component.addEventListener("mouseover", function () {
+                highlight(component.innerText);
+            });
+            component.addEventListener("mouseout", function () {
+                unhighlight(component.innerText);
+            });
+
+            // Add to components mapping
+            let name = component.innerText;
+            if (!(name in components)) {
+                components[name] = [];
+            }
+            components[name].push(component);
+        }
+    }
+
+    window.onload.functions.push(init);
+
+</script>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title display-6">Skills</h5>
+        {% for skill in skills %}
+            <span class="badge badge-light component">{{skill}}</span>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="card responsive"  style="width: 40%">
+    <div class="card-body">
+        <h5 class="card-title display-1">Reece Mathews</h5>
+        <p class="card-text lead">
+            B.S. in Computer Science, University of Kansas, May 2022
+        </p>
+        <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%;" alt="...">
+        {% for social in socials %}
+            <a href="{{social.url}}" class="badge social-badge" style="margin-top: 5px;"><img src="{% static social.icon %}" class="img-fluid" alt="{{social.name}}" style="margin-right: 5px; width: 32px;">{{social.user}}</a>
+        {% endfor %}
+
+        <br>
+        <br>
+
+        I am a recent graduate of the Computer Science program at the University of Kansas. I have been programming and making things for most of my life and have yet to lose my love for any of it.
+    </div>
+    {% include "skills.html" %}
+</div>

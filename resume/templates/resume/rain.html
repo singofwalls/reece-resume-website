@@ -158,7 +158,7 @@
     }
 
     toggleRain(true);
-    window.onload = init;
+    window.onload.functions.push(init);
     window.addEventListener('resize', function(event) {
         init();
     }, true);

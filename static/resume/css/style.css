@@ -60,9 +60,14 @@ p {
     padding: 7px;
 }
 
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
 a:hover {
     color: white;
-    font-weight: 600;
+    text-shadow: 0px 0px 1px white;
 }
 
 body {

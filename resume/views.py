@@ -1,4 +1,5 @@
-from collections import namedtuple
+from collections import Counter, namedtuple
+from itertools import chain
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 
@@ -53,6 +54,13 @@ class index(TemplateView):
             "Upgraded a web-application's entire stack including the server hardware, OS, database, backend code, and frontend code. Adding features to Matlab and Django code bases.", 
             ["Matlab", "Django", "Python", "Postgresql", "CentOS", "Linux", "Machine Learning", "JS", "GeoServer", "Webhosting", "Apache"],
             "2019 - Present"),
+        Experience("Computer Science Student", 
+            "University of Kansas", 
+            "1450 Jayhawk Blvd, Lawrence, KS 66045",
+            "",
+            "Bachelors of Science in Computer Science", 
+            ["Matlab", "C++", "Python", "MySQL", "Linux", "Haskell", "Machine Learning", "JS", "x64 Assembly", "MIPS Assembly", "Interpreters", "Compilers"],
+            "2018 - 2022"),
         Experience("IT Lead", 
             "American Legion Boys State of Kansas", 
             "1314 SW. Topeka Blvd., Topeka, KS 66612",
@@ -101,4 +109,13 @@ class index(TemplateView):
         context['projects'] = self.projects
         context['experiences'] = self.experiences
         context['socials'] = self.socials
+
+        # Consolidate skills
+        skills = list(chain.from_iterable([project.components for project in self.projects]))
+        skills += list(chain.from_iterable([experience.components for experience in self.experiences]))
+        # Sort by frequency
+        skills = Counter(skills)
+        context["skills"] = sorted(skills.keys(), key=lambda skill: skills[skill], reverse=True)
+
+
         return context

@@ -2,64 +2,23 @@
 {% include "header.html" %}
 {% load static %}
 
+
+<script>
+    // Set up onload to allow arbitrary number of functions
+    window.onload = function() {
+        for (let func of window.onload.functions) {
+            func();
+        }
+    }
+    window.onload.functions = [];
+</script>
+
 {% include "rain.html" %}
 
-
 <div class="container" style="flex-flow: row wrap; margin-top: 20px">
-    <!-- Left column, me -->
-    <div class="card responsive"  style="width: 40%">
-        <div class="card-body">
-            <h5 class="card-title display-1">Reece Mathews</h5>
-            <p class="card-text lead">
-                B.S. in Computer Science, University of Kansas, May 2022
-            </p>
-            <img src="{% static 'me rivendell.png' %}" class="img-fluid" style="width: 100%;" alt="...">
-            {% for social in socials %}
-                <a href="{{social.url}}" class="badge social-badge" style="margin-top: 5px;"><img src="{% static social.icon %}" class="img-fluid" alt="{{social.name}}" style="margin-right: 5px; width: 32px;">{{social.user}}</a>
-            {% endfor %}
-        </div>
-    </div>
-    <!-- Middle column, projects -->
-    <div class="card responsive" style="width: 30%">
-        <div class="card-body">
-            <h5 class="card-title display-6" style="margin-bottom: 30px; padding-left: 15px;">Projects</h5>
-            {% for project in projects %}
-            <div class="card inner-card" style="margin-bottom: 5px;">
-                <div class="card-body">
-                    <div class="card-header" style="border: 0px; margin-bottom: 5px;">{{project.type}}</div>
-                    <h5 class="card-title">{{project.title}}</h5>
-                    {% comment %} <img src="{{project.img}}" class="img-fluid" style='margin-bottom: 10px' alt="{{project.title}}"> {% endcomment %}
-                    <p class="card-text">
-                        {{project.desc|safe}}
-                    </p>
-                    {% for component in project.components %}
-                        <span class="badge badge-light">{{component}}</span>
-                    {% endfor %}
-                    <a href="{{project.url}}" class="stretched-link"></a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="card responsive" style="width: 30%">
-        <div class="card-body">
-            <h5 class="card-title display-6" style="margin-bottom: 30px; padding-left: 15px;">Experience</h5>
-            {% for experience in experiences %}
-            <div class="card inner-card" style="margin-bottom: 5px;">
-                <div class="card-body">
-                    <div class="card-header" style="border: 0px; margin-bottom: 5px;">{{experience.location|safe}}</div>
-                    <p><i><small>{{experience.address}}</small></i></p>
-                    <h5 class="card-title">{{experience.title}}</h5>
-                    <p><small>{{experience.period}}. Under {{experience.supervisor}}</small></p>
-                    <p class="card-text">
-                        {{experience.desc}}
-                    </p>
-                    {% for component in experience.components %}
-                        <span class="badge badge-light">{{component}}</span>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+    {% include "overview.html" %}
+    {% include "experiences.html" %}
+    {% include "projects.html" %}
 </div>
+
+{% include "footer.html" %}
