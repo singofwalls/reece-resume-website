@@ -104,13 +104,17 @@ class index(TemplateView):
                "singofwalls",
                "https://github.com/singofwalls"),
         Social("Stack Overflow", 
-               "logos/LogoGlyphXxs.png",
+               "logos/stackoverflow.png",
                "reece-mathews",
                "https://stackoverflow.com/users/7587147/reece-mathews"),
         Social("Twitter", 
                "logos/Twitter social icons - circle - white.png",
                "singofwalls",
                "https://twitter.com/singofwalls"),
+        Social("Goodreads", 
+               "logos/goodreads.png",
+               "vormela_burn",
+               "https://goodreads.com/vormel_burn"),
         Social("Linked In", 
                "logos/linkedin.png",
                "reece-mathews",
@@ -131,6 +135,5 @@ class index(TemplateView):
         # Sort by frequency
         skills = Counter(skills)
         context["skills"] = sorted(skills.keys(), key=lambda skill: skills[skill], reverse=True)
-
 
         return context
