@@ -1,6 +1,5 @@
 from collections import Counter, namedtuple
 from itertools import chain
-from django.http import HttpResponse
 from django.views.generic import TemplateView
 
 
